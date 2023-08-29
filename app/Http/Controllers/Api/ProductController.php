@@ -31,4 +31,13 @@ class ProductController extends BaseController
         $product = Product::create($request->all());
         return $this->sendResponse(new ProductResource($product), 'Product Added Successfully');
     }
+    public function show($id)
+    {
+        $product = Product::find($id);
+        if (is_null($product)) {
+            return $this->sendError('Product Not Found');
+        }
+
+        return $this->sendResponse(new ProductResource($product), "Product Retrieved Successfully");
+    }
 }
