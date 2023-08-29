@@ -40,4 +40,24 @@ class ProductController extends BaseController
 
         return $this->sendResponse(new ProductResource($product), "Product Retrieved Successfully");
     }
+    public function update(Request $request, Product $product)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error', $validator->errors());
+        }
+
+        $product->update($request->all());
+        return $this->sendResponse(new ProductResource($product), "Product Updated Successfully");
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return $this->sendResponse(new ProductResource($product), "Product Deleted Successfully");
+    }
 }
