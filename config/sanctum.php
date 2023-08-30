@@ -7,7 +7,9 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Stateful Domains
-    |--------------------------------------------------------------------------
+    
+    |
+    --------------------------------------------------------------------------
     |
     | Requests from the following domains / hosts will receive stateful API
     | authentication cookies. Typically, these should include your local

@@ -6,7 +6,7 @@ use App\Http\Controllers\BaseController as BaseController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Illuminate\Support\Facades\Validator as Validator;
 
 class RegisterController extends BaseController
 {
@@ -56,7 +56,18 @@ class RegisterController extends BaseController
             $success['name'] = $user->name;
             return $this->sendResponse($success, 'User LoggedIn Successfully');
         } else {
-            return sendError('Unauthorized', ['error' => 'Unauthorized']);
+            return $this->sendError('Unauthorized', ['error' => 'Unauthorized']);
+        }
+    }
+
+    public function logout()
+    {
+        if (auth()->check()) {
+            auth()->user()->tokens()->delete();
+            // dd($deletedTokens); // Debug: Check if tokens were deleted
+            return $this->sendResponse([], "User Logged Out");
+        } else {
+            return $this->sendError("User not authenticated");
         }
     }
 }

@@ -6,7 +6,7 @@ use App\Http\Controllers\BaseController as BaseController;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator as Validator;
 
 class ProductController extends BaseController
 {
